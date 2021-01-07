@@ -3,7 +3,7 @@
 from sklearn import preprocessing
 
 class Preprocess():
-    def __init__(self, x, method):
+    def __init__(self, x=None, method="standard_scaler"):
         self.x = x
         self.method = method
     def preprocess(self):
@@ -16,6 +16,9 @@ class Preprocess():
         }
         return(func[self.method])
     def run(self):
-        x_new = self.preprocess().fit_transform(self.x)
-        return(x_new)
+        if self.x is None:
+            raise ValueError("Traning data is None")
+        else:
+            x_new = self.preprocess().fit_transform(self.x)
+            return(x_new)
 

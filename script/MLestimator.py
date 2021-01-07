@@ -4,7 +4,7 @@ from sklearn import svm
 from sklearn import ensemble
 
 class Estimator():
-    def __init__(self, x, y, method):
+    def __init__(self, x=None, y=None, method="svc"):
         self.x = x
         self.y = y
         self.method = method
@@ -15,7 +15,10 @@ class Estimator():
             }
         return(func[self.method])
     def run(self):
-        clf = self.estimator()
-        clf.fit(self.x, self.y)
-        return(clf)
+        if self.x is None or self.y is None:
+            raise ValueError("Traning data is None")
+        else:
+            clf = self.estimator()
+            clf.fit(self.x, self.y)
+            return(clf)
 
